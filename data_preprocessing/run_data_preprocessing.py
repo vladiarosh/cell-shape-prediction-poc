@@ -14,26 +14,29 @@ def main(run_step_3: bool, run_step_8: bool, threshold=0.6, cutoff=1.5):
     # Your current directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Folder within the current directory where you save all data files from preprocessing
-    data_folder = os.path.join(script_dir, 'data')
+    # Construct file paths based on data directory
+    data_dir = os.path.join(script_dir, 'data')
 
-    # Construct file paths based on data_folder
-    profiles_file = os.path.join(data_folder, 'profiles_var_mad_int.parquet')
-    filtered_compounds_file = os.path.join(data_folder, 'filtered_compounds.parquet')
-    z_scored_file = os.path.join(data_folder, 'z_scored_against_dmso.parquet')
-    compounds_file = os.path.join(data_folder, 'compound.csv')
-    compounds_smiles_file = os.path.join(data_folder, 'compounds_with_SMILES.csv')
-    merged_smiles_file = os.path.join(data_folder, 'z_scored_against_dmso_with_SMILES.parquet')
-    variance_filtered_file = os.path.join(data_folder, 'variance_filtered_data.parquet')
-    averaged_data_file = os.path.join(data_folder, 'averaged_data.parquet')
-    train_file = os.path.join(data_folder, 'random_split_train_output.parquet')
-    val_file = os.path.join(data_folder, 'random_split_val_output.parquet')
-    test_file = os.path.join(data_folder, 'random_split_test_output.parquet')
-    tanimoto_train_file = os.path.join(data_folder, 'tanimoto_train_output.parquet')
-    tanimoto_test_file = os.path.join(data_folder, 'tanimoto_test_output.parquet')
-    latent_train_file = os.path.join(data_folder, 'latent_train_data_normalized.parquet')
-    latent_val_file = os.path.join(data_folder, 'latent_val_data_normalized.parquet')
-    latent_test_file = os.path.join(data_folder, 'latent_test_data_normalized.parquet')
+    input_files_dir = os.path.join(data_dir, 'input')
+    runtime_files_dir = os.path.join(data_dir, 'runtime')
+
+    profiles_file = os.path.join(input_files_dir, 'profiles_var_mad_int.parquet')
+    compounds_file = os.path.join(input_files_dir, 'compound.csv')
+
+    filtered_compounds_file = os.path.join(runtime_files_dir, 'filtered_compounds.parquet')
+    z_scored_file = os.path.join(runtime_files_dir, 'z_scored_against_dmso.parquet')
+    compounds_smiles_file = os.path.join(runtime_files_dir, 'compounds_with_SMILES.csv')
+    merged_smiles_file = os.path.join(runtime_files_dir, 'z_scored_against_dmso_with_SMILES.parquet')
+    variance_filtered_file = os.path.join(runtime_files_dir, 'variance_filtered_data.parquet')
+    averaged_data_file = os.path.join(runtime_files_dir, 'averaged_data.parquet')
+    train_file = os.path.join(runtime_files_dir, 'random_split_train_output.parquet')
+    val_file = os.path.join(runtime_files_dir, 'random_split_val_output.parquet')
+    test_file = os.path.join(runtime_files_dir, 'random_split_test_output.parquet')
+    tanimoto_train_file = os.path.join(runtime_files_dir, 'tanimoto_train_output.parquet')
+    tanimoto_test_file = os.path.join(runtime_files_dir, 'tanimoto_test_output.parquet')
+    latent_train_file = os.path.join(runtime_files_dir, 'latent_train_data_normalized.parquet')
+    latent_val_file = os.path.join(runtime_files_dir, 'latent_val_data_normalized.parquet')
+    latent_test_file = os.path.join(runtime_files_dir, 'latent_test_data_normalized.parquet')
 
     # Step 1: Filter compounds taking only ones having between 8 and 15 repeats
     filter_compounds(profiles_file, filtered_compounds_file)
